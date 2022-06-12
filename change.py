@@ -1,20 +1,18 @@
+# 算出應該找零的數量
 def refund(bill, pay):
     change = pay - bill
-    fourKids = int(change / 1000)
-    change %= 1000
-    deer = int(change / 500)
-    change %= 500
-    sunWen = int(change / 100)
-    change %= 100
-    goldCoin = int(change / 50)
-    change %= 50
-    ten = int(change / 10)
-    change %= 10
-    five = int(change / 5)
-    change %= 5
-    one = int(change / 1)
-    print(fourKids,'張千元, ', deer, '張五百, ', sunWen, '張百元, ', goldCoin, '個五十元, ', ten, '個十元, ', five, '個五元, ', one, '個一元' )
+    currency = [1000,500,100,50,10,5,1] # 所有法幣的幣值
+    num = []
+    print('找零為', change, '元')
+    # 利用迴圈從最大的幣值開始除，若該幣值需找零，則列印出數字
+    for c in currency:
+        n = int(change / c)
+        num.append(n)
+        change %= c
+        if n > 0:
+            print(c, '元 X', n)
 
+# 判斷是否需找零
 def enough(bill, pay):
     if bill < pay:
         refund(bill, pay)
@@ -23,6 +21,7 @@ def enough(bill, pay):
     else:
         print('謝謝您的光臨！')
 
+# main
 def main():
     bill = int(input('請輸入應付金額 NT$'))
     pay = int(input('請輸入實際付款金額 NT$'))
